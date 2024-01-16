@@ -6,12 +6,17 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct ExploreSwiftDataApp: App {
+    @StateObject private var userFetcher = UserFetcher()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            UsersView()
+                .modelContainer(for: UserModel.self)
+                .environmentObject(userFetcher)
         }
     }
 }

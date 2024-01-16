@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct UsersView: View {
-    @EnvironmentObject private var userManager: UserFetcher
+    @Environment(\.userFetcher) private var userManager
     @Environment(\.modelContext) private var modelContext
     
     var body: some View {

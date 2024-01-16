@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import SwiftUI
 
-@MainActor
-final class UserFetcher: ObservableObject {
-    @Published var users = [UserModel]()
-    @Published var errorMessage: String?
+@Observable
+final class UserFetcher {
+    var users = [UserModel]()
+    var errorMessage: String?
     
     func fetchUsers() async {
         let url = URL(string: "https://jsonplaceholder.typicode.com/users")!
@@ -24,4 +25,15 @@ final class UserFetcher: ObservableObject {
         }
         
     }
+}
+
+extension EnvironmentValues {
+    var userFetcher: UserFetcher {
+        get { self[UserFetcherKey.self] }
+        set { self[UserFetcherKey.self] = newValue }
+    }
+}
+
+private struct UserFetcherKey: EnvironmentKey {
+    static var defaultValue: UserFetcher = UserFetcher()
 }

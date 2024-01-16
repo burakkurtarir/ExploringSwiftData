@@ -10,13 +10,13 @@ import SwiftData
 
 @main
 struct ExploreSwiftDataApp: App {
-    @StateObject private var userFetcher = UserFetcher()
+    @State private var userFetcher = UserFetcher()
     
     var body: some Scene {
         WindowGroup {
             UsersView()
                 .modelContainer(for: UserModel.self)
-                .environmentObject(userFetcher)
+                .environment(userFetcher)
         }
     }
 }
